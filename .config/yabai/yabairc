@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+### Inject Dock.app wihtout sudo passwd
+sudo yabai --load-sa
+
+yabai -m config layout bsp
+yabai -m config top_padding 2
+yabai -m config bottom_padding 2
+yabai -m config left_padding 2
+yabai -m config right_padding 2
+yabai -m config window_gap 2
+yabai -m config auto_balance off
+yabai -m config split_ratio 0.5
+yabai -m config mouse_modifier fn
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config window_topmost on
+yabai -m config window_border_blur off
+yabai -m config focus_follows_mouse autoraise
+yabai -m config window_origin_display focused
+# yabai -m config mouse_follows_focus on
+
+# borders shadows opacity
+yabai -m config window_border on \
+	window_shadow off \
+	window_border_width 1 \
+	window_border_hidpi off \
+	window_border_radius 10 \
+	active_window_border_color 0xffe1e3e4 \
+	normal_window_border_color 0xff2a2f38 \
+	insert_feedback_color 0xff9dd274
+
+# applications with custom rules
+# applications="(Calendar|Mail|Reminders|Notes|Microsoft Outlook|Discord|Messages|Slack|Firefox|Chrome|Code|Microsoft Word|Preview|Terminal|iTerm2|QuickTime|Player|Spotify|Music|Brave Browser|Kitty|Alacritty|Trello)"
+
+# NOTE: you need to set the settings for the applications in the
+#       list first, or else they don't apply properly and you can end up with
+#       some weird border/float/window behaviours
+
+# everything listed gets sent to below layer to prevent
+# them from covering floating applications/popup windows
+# yabai -m rule --add app="^${applications}$" manage=on layer=below
+# Exclude problematic apps from being managed:
+# yabai -m rule --add app="^(LuLu|Vimac|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off
+yabai -m rule --add app="^Системные настройки$" manage=off sticky=on
+yabai -m rule --add subrole="AXDialog" layer=above
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
