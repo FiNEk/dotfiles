@@ -17,5 +17,7 @@ if [ "$system_type" = "Darwin" ]; then
 
 fi
 
+echo "Decrypting secrets"
+yadm decrypt
 echo "Updating the yadm repo origin URL"
 yadm remote set-url origin "git@github.com:FiNEk/dotfiles.git"
