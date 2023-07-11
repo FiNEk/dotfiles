@@ -1,6 +1,33 @@
 #!/bin/sh
 
+yes_or_no() {
+	while true; do
+		read -p "$* [y/n]: " yn
+		case $yn in
+		[Yy]*) return 0 ;;
+		[Nn]*)
+			echo "Aborted"
+			return 1
+			;;
+		esac
+	done
+}
+
+open -a "App Store"
+yes_or_no "Did you login to the App Store?" || exit 1
+
+echo "Decrypting secrets"
+yadm decrypt
+echo "Updating the yadm repo origin URL with ssh"
+yadm remote set-url origin "git@github.com:FiNEk/dotfiles.git"
+
 system_type=$(uname -s)
+
+# Install oh-my-zsh if it's missing
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+	echo "Install oh-my-zsh"
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
 
 if [ "$system_type" = "Darwin" ]; then
 
@@ -17,7 +44,17 @@ if [ "$system_type" = "Darwin" ]; then
 
 fi
 
-echo "Decrypting secrets"
-yadm decrypt
-echo "Updating the yadm repo origin URL"
-yadm remote set-url origin "git@github.com:FiNEk/dotfiles.git"
+# Install AstroNVim if it's missing
+if [ ! -d "$HOME/.config/nvim" ]; then
+	echo "Installing AstroNvim"
+	git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+	git clone git@github.com:FiNEk/astro_nvim.git ~/.config/nvim/lua/user
+	nvim --headless -c 'quitall'
+fi
+
+echo "Setup complete!"
+echo "Things to do:"
+echo "Enable Brave Sync"
+echo "Login to everything"
+echo "OPTIONAL: Disable SIP for yabai"
+echo "https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection"
