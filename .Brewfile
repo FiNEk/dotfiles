@@ -21,6 +21,7 @@ brew "bottom"
 brew "fzf"
 brew "gdu"
 brew "lazygit"
+brew "mas"
 cask "postman"
 cask "docker"
 cask "spotify"
@@ -28,7 +29,10 @@ cask "surfshark"
 cask "visual-studio-code"
 cask "wezterm"
 cask "zoom"
+cask "slack"
 cask "brave-browser"
 cask "font-jetbrains-mono-nerd-font"
-
+mas "Amphetamine", id: 937984704
+mas "Bitwarden", id: 1352778147
+mas "Telegram", id: 747648890
 brew "powerlevel10k"
