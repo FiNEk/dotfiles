@@ -30,9 +30,8 @@ yabai -m config window_border on \
 	insert_feedback_color 0xff9dd274
 
 #### RULES ####
-#
 # applications with custom rules
-# applications="(Calendar|Mail|Reminders|Notes|Microsoft Outlook|Discord|Messages|Slack|Firefox|Chrome|Code|Microsoft Word|Preview|Terminal|iTerm2|QuickTime|Player|Spotify|Music|Brave Browser|Kitty|Alacritty|Trello)"
+applications="(Calendar|Mail|Reminders|Notes|Microsoft Outlook|Discord|Messages|Slack|Firefox|Chrome|Code|Microsoft Word|Preview|Terminal|iTerm2|QuickTime|Player|Spotify|Music|Brave Browser|Kitty|Alacritty|Trello)"
 
 # NOTE: you need to set the settings for the applications in the
 #       list first, or else they don't apply properly and you can end up with
@@ -40,11 +39,7 @@ yabai -m config window_border on \
 
 # everything listed gets sent to below layer to prevent
 # them from covering floating applications/popup windows
-# yabai -m rule --add app="^${applications}$" manage=on layer=below
-# Exclude problematic apps from being managed:
-# yabai -m rule --add app="^(LuLu|Vimac|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off
-# yabai -m rule --add app="^Системные настройки$" manage=off sticky=on
-# yabai -m rule --add app="^System Settings$" manage=off sticky=on
+yabai -m rule --add app="^${applications}$" manage=on layer=below
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="macfeh" app="^macfeh$" manage=off
