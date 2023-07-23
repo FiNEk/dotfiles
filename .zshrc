@@ -3,7 +3,8 @@ source ~/.zplug/init.zsh
 
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "RitchieS/zsh-exa"
+zplug "zsh-users/zsh-completions"
+zplug "zap-zsh/exa"
 zplug "fdellwing/zsh-bat"
 
 if ! zplug check --verbose; then
@@ -16,11 +17,6 @@ fi
 zplug load
 
 # Aliases
-# alias ls="lsd"
-# alias l='ls -l'
-# alias la='ls -a'
-# alias lla='ls -la'
-# alias lt='ls --tree'
 alias vim='nvim'
 # autostart TMUX
 [ -z "$TMUX" ] && exec tmux new -As .

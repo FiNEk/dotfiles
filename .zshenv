@@ -1,3 +1,2 @@
-ZSH_TMUX_AUTOSTART_ONCE=true
-ZSH_TMUX_AUTOCONNECT=true
-XDG_CONFIG_HOME="/Users/fnk/.config"
+XDG_CONFIG_HOME="/Users/denis/.config"
+. "$HOME/.cargo/env"

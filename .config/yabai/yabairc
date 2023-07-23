@@ -4,8 +4,7 @@ sudo yabai --load-sa
 
 yabai -m config layout bsp
 yabai -m config top_padding 2
-yabai -m config bottom_padding 2
-yabai -m config left_padding 2
+yabai -m config bottom_padding 2 yabai -m config left_padding 2
 yabai -m config right_padding 2
 yabai -m config window_gap 2
 yabai -m config auto_balance off
@@ -39,7 +38,7 @@ applications="(Calendar|Mail|Reminders|Notes|Microsoft Outlook|Discord|Messages|
 
 # everything listed gets sent to below layer to prevent
 # them from covering floating applications/popup windows
-yabai -m rule --add app="^${applications}$" manage=on layer=below
+# yabai -m rule --add app="^${applications}$" manage=on layer=below
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="macfeh" app="^macfeh$" manage=off

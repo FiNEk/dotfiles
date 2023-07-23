@@ -2,13 +2,14 @@ format = """
 [](#45475a)\
 $os\
 $username\
-[ ](fg:#45475a)\
+[](fg:#45475a bg:#b4befe)\
+$directory\
+[ ](fg:#b4befe)\
 """
 
 right_format = """
-[](fg:#b4befe)
-$directory\
-[](fg:#b4befe bg:#cba6f7)\
+$status\
+[](fg:#cba6f7)\
 $git_branch\
 $git_status\
 [](fg:#cba6f7 bg:#74c7ec)\
@@ -18,6 +19,11 @@ $nodejs\
 $rust\
 [](fg:#74c7ec)\
 """
+
+[status]
+disabled = false
+symbol = "󰯈 "
+
 # Disable the blank line at the start of the prompt
 # add_newline = false
 
@@ -41,7 +47,7 @@ Macos = " "
 
 [directory]
 style = "bg:#b4befe fg:#11111b"
-format = "[󰁥 $path ]($style)"
+format = "[ 󰁥 $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
