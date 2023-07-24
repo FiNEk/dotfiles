@@ -19,14 +19,14 @@ yes_or_no "Did you login to the App Store?" || exit 1
 echo "Decrypting secrets"
 yadm decrypt
 echo "Updating the yadm repo origin URL with ssh"
-yadm remote set-url origin "git@github.com:FiNEk/dotfiles.git"
+yadm remote set-url origin "git@finek.github.com:FiNEk/dotfiles.git"
 
 system_type=$(uname -s)
 
-# Install oh-my-zsh if it's missing
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-	echo "Install oh-my-zsh"
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Install zplug if its missing
+if [ ! -d "$HOME/.zplug" ]; then
+	echo "Installing zplug"
+	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 fi
 
 if [ "$system_type" = "Darwin" ]; then
