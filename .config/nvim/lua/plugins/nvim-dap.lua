@@ -36,6 +36,11 @@ return {
           }
         end
       end
+      local launchjson_path = vim.fn.getcwd() .. "/.vscode/launch.json"
+      local is_launchjson_present = vim.fn.filereadable(launchjson_path) == 1
+      if is_launchjson_present then
+        require("dap.ext.vscode").load_launchjs(launchjson_path)
+      end
     end,
   },
 }
