@@ -17,7 +17,7 @@ config.enable_tab_bar = false
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Medium" })
 config.font_size = 15
 -- GPU
-config.front_end = "WebGpu"
-config.max_fps = 144
+-- config.front_end = "WebGpu"
+-- config.max_fps = 144
 
 return config

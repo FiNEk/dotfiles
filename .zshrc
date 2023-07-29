@@ -1,32 +1,70 @@
-source <(curl -sL init.zshell.dev); zzinit
-zi wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
+if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
+  print -P "%F{33}▓▒░ %F{160}Installing (%F{33}z-shell/zi%F{160})…%f"
+  command mkdir -p "$HOME/.zi" && command chmod go-rwX "$HOME/.zi"
+  command git clone -q --depth=1 --branch "main" https://github.com/z-shell/zi "$HOME/.zi/bin" && \
+    print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+    print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+source "$HOME/.zi/bin/zi.zsh"
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
+
+## completion settings - pretty print - ignore case
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' rehash true
+
+## faster startup, but less safer
+export ZSH_DISABLE_COMPFIX="true"
+
+# setopt
+setopt hist_ignore_all_dups     # Remove older duplicate entries from history
+setopt hist_expire_dups_first   # Expire A Duplicate Event First When Trimming History.
+setopt hist_ignore_dups         # Do Not Record An Event That Was Just Recorded Again.
+setopt hist_reduce_blanks       # Remove superfluous blanks from history items
+setopt hist_find_no_dups        # Do Not Display A Previously Found Event.
+setopt hist_ignore_space        # Do Not Record An Event Starting With A Space.
+setopt hist_save_no_dups        # Do Not Write A Duplicate Event To The History File.
+setopt hist_verify              # Do Not Execute Immediately Upon History Expansion.
+
+## brew install gnupg
+export GPG_TTY=$(tty)
+
+zi wait lucid light-mode depth"1" for \
+  atinit"ZI[COMPINIT_OPTS]=-C;" \
     z-shell/F-Sy-H \
-    OMZP::colored-man-pages \
     zsh-users/zsh-autosuggestions \
-  blockf atpull'zi creinstall -q .' \
+  as'completion' atload'zicompinit; zicdreplay' \
     zsh-users/zsh-completions \
+  as"command" from"gh-r" atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" atpull"%atclone" src"init.zsh" \
+    starship/starship \
   atload"bindkey '\t' menu-complete '$terminfo[kcbt]' reverse-menu-complete" \
     marlonrichert/zsh-autocomplete \
     zap-zsh/exa \
     fdellwing/zsh-bat \
+    OMZP::colored-man-pages \
+    changyuheng/zsh-interactive-cd \
+    lukechilds/zsh-nvm \
+    # jeffreytse/zsh-vi-mode
 
-zi ice as"command" from"gh-r" \
-  atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-  atpull"%atclone" src"init.zsh"
-zi light starship/starship
+
+PS1=`print "%F{magenta}λ%f "`
+
 
 # Aliases
 alias vim='nvim'
 # autostart TMUX
 [ -z "$TMUX" ] && exec tmux new -As .
-
-### SLOW AS FUCK
-# init copilot cli
-# eval "$(github-copilot-cli alias -- "$0")"
-# load nvm
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-### SLOW AS FUCK
-
