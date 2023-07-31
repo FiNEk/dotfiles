@@ -3,9 +3,9 @@ return {
     "mfussenegger/nvim-dap",
     opts = function()
       local dap = require("dap")
-      require("dap").adapters["pwa-node"] = {
+      require("dap").adapters["node"] = {
         type = "server",
-        host = "127.0.0.1",
+        host = "localhost",
         port = "${port}",
         executable = {
           command = "node",
@@ -20,14 +20,14 @@ return {
         if not dap.configurations[language] then
           dap.configurations[language] = {
             {
-              type = "pwa-node",
+              type = "node",
               request = "launch",
               name = "Launch file",
               program = "${file}",
               cwd = "${workspaceFolder}",
             },
             {
-              type = "pwa-node",
+              type = "node",
               request = "attach",
               name = "Attach",
               processId = require("dap.utils").pick_process,
@@ -36,11 +36,19 @@ return {
           }
         end
       end
-      local launchjson_path = vim.fn.getcwd() .. "/.vscode/launch.json"
-      local is_launchjson_present = vim.fn.filereadable(launchjson_path) == 1
-      if is_launchjson_present then
-        require("dap.ext.vscode").load_launchjs(launchjson_path)
+      -- if launch.json exists then load it
+      if vim.fn.filereadable(".vscode/launch.json") == 1 then
+        require("dap.ext.vscode").load_launchjs(nil, { node = { "javascript", "typescript" } })
       end
     end,
+    -- keys = {
+    --   {
+    --     "<leader>dL",
+    --     function()
+    --       require("dap.ext.vscode").load_launchjs(nil, { pwa_node = { "javascript", "typescript" } })
+    --     end,
+    --     desc = "Load launch.json",
+    --   },
+    -- },
   },
 }
