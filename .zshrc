@@ -9,8 +9,8 @@ source "$HOME/.zi/bin/zi.zsh"
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 
-## completion settings - pretty print - ignore case
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+## PRETTY COMPLETIONS
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
@@ -26,6 +26,17 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' rehash true
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa --icons -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+# use fzf-tab for tmux popup
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# min width for tmux popup
+zstyle ':fzf-tab:*' popup-min-size 70 10
 
 ## faster startup, but less safer
 export ZSH_DISABLE_COMPFIX="true"
@@ -44,24 +55,23 @@ setopt hist_verify              # Do Not Execute Immediately Upon History Expans
 export GPG_TTY=$(tty)
 
 zi wait lucid light-mode depth"1" for \
+  as'completion' atload'zicompinit; zicdreplay' \
+    clarketm/zsh-completions \
+    Aloxaf/fzf-tab \
   atinit"ZI[COMPINIT_OPTS]=-C;" \
     z-shell/F-Sy-H \
     zsh-users/zsh-autosuggestions \
-  as'completion' atload'zicompinit; zicdreplay' \
-    zsh-users/zsh-completions \
   as"command" from"gh-r" atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" atpull"%atclone" src"init.zsh" \
     starship/starship \
-  atload"bindkey '\t' menu-complete '$terminfo[kcbt]' reverse-menu-complete" \
-    marlonrichert/zsh-autocomplete \
     zap-zsh/exa \
     fdellwing/zsh-bat \
     OMZP::colored-man-pages \
-    changyuheng/zsh-interactive-cd \
     lukechilds/zsh-nvm \
+    # marlonrichert/zsh-autocomplete \
     # jeffreytse/zsh-vi-mode
 
 
-PS1=`print "%F{magenta}λ%f "`
+PS1=`print $(echo $PWD) "%F{magenta}λ%f "`
 
 
 # Aliases
