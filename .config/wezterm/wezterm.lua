@@ -11,7 +11,7 @@ if wezterm.config_builder then
 end
 
 -- Appearance
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Tokyo Night"
 config.enable_tab_bar = false
 -- Fonts
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Medium" })
