@@ -3,9 +3,9 @@ return {
     "mfussenegger/nvim-dap",
     opts = function()
       local dap = require("dap")
-      require("dap").adapters["node"] = {
+      require("dap").adapters["pwa-node"] = {
         type = "server",
-        host = "localhost",
+        host = "127.0.0.1",
         port = "${port}",
         executable = {
           command = "node",
@@ -17,38 +17,27 @@ return {
         },
       }
       for _, language in ipairs({ "typescript", "javascript" }) do
-        if not dap.configurations[language] then
-          dap.configurations[language] = {
-            {
-              type = "node",
-              request = "launch",
-              name = "Launch file",
-              program = "${file}",
-              cwd = "${workspaceFolder}",
-            },
-            {
-              type = "node",
-              request = "attach",
-              name = "Attach",
-              processId = require("dap.utils").pick_process,
-              cwd = "${workspaceFolder}",
-            },
-          }
-        end
+        dap.configurations[language] = {
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach",
+            processId = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+          },
+        }
       end
       -- if launch.json exists then load it
       if vim.fn.filereadable(".vscode/launch.json") == 1 then
-        require("dap.ext.vscode").load_launchjs(nil, { node = { "javascript", "typescript" } })
+        require("dap.ext.vscode").load_launchjs(nil, { ["pwa-node"] = { "javascript", "typescript" } })
       end
     end,
-    -- keys = {
-    --   {
-    --     "<leader>dL",
-    --     function()
-    --       require("dap.ext.vscode").load_launchjs(nil, { pwa_node = { "javascript", "typescript" } })
-    --     end,
-    --     desc = "Load launch.json",
-    --   },
-    -- },
   },
 }
