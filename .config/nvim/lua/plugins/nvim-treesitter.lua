@@ -1,10 +1,10 @@
+local utils = require("utils")
+local required_parsers = { "typescript", "tsx", "vue" }
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
-      end
+      utils.list.extend_or_create(opts.ensure_installed, required_parsers)
     end,
   },
 }

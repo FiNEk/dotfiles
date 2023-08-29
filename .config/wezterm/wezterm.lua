@@ -10,13 +10,20 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- Appearance
+-- ## Appearance ##
 config.color_scheme = "Tokyo Night"
 config.enable_tab_bar = false
--- Fonts
+config.enable_scroll_bar = false
+config.window_padding = {
+	left = 6,
+	right = 0,
+	top = "0.5cell",
+	bottom = "0.5cell",
+}
+-- ## Fonts ##
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Medium" })
 config.font_size = 15
--- GPU
+-- ## GPU ##
 -- config.front_end = "WebGpu"
 -- config.max_fps = 144
 
