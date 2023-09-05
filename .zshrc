@@ -81,4 +81,4 @@ alias vim='nvim'
 [ -z "$TMUX" ] && exec tmux new -As .
 
 ## force keychain add
-ssh-add --apple-use-keychain ~/.ssh/FiNEk
+# ssh-add --apple-use-keychain ~/.ssh/FiNEk

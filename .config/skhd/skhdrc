@@ -48,10 +48,10 @@ cmd - r : yabai -m space --rotate 180
 
 ## MOVING WINDOWS 
 # move window, change desktop if no window
-# shift + alt - h : yabai -m window --swap west
-# shift + alt - j : yabai -m window --swap south
-# shift + alt - k : yabai -m window --swap north
-# shift + alt - l : yabai -m window --swap east
+# cmd + shift - h : yabai -m window --swap west
+# cmd + shift - j : yabai -m window --swap south
+# cmd + shift - k : yabai -m window --swap north
+# cmd + shift - l : yabai -m window --swap east
 # # send window to monitor and follow focus
 # shift + alt - a : yabai -m window --display west; yabai -m display --focus west
 # shift + alt - d : yabai -m window --display east; yabai -m display --focus east
