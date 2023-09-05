@@ -1,3 +1,3 @@
-# Keybinds
+## BUGS
 
-- Buffer Unpin All
+- `]]` doesnt jump to next reference for some reason
