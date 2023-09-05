@@ -29,10 +29,10 @@ cmd + shift - n : yabai -m space --create && \
                   yabai -m space --focus "${index}"
 # ## FOCUS
 # # focus window 
-cmd - left : yabai -m window --focus west
-cmd - right : yabai -m window --focus east
-cmd - down : yabai -m window --focus south
-cmd - up : yabai -m window --focus north
+cmd + ctrl - h : yabai -m window --focus west
+cmd + ctrl - l : yabai -m window --focus east
+cmd + ctrl - j : yabai -m window --focus south
+cmd + ctrl - k : yabai -m window --focus north
 
 ## MISC
 # float / unfloat window and center on screen
@@ -60,8 +60,8 @@ cmd - r : yabai -m space --rotate 180
 # ctrl + shift + alt - a : $HOME/.config/skhd/swap_monitor.sh west
 #
 # ## RESIZE
-cmd + shift - left : yabai -m window west --resize right:-20:0 2> /dev/null || yabai -m window --resize right:-20:0
-cmd + shift - down : yabai -m window north --resize bottom:0:20 2> /dev/null || yabai -m window --resize bottom:0:20
-cmd + shift - up : yabai -m window south --resize top:0:-20 2> /dev/null || yabai -m window --resize top:0:-20
-cmd + shift - right: yabai -m window east --resize left:20:0 2> /dev/null || yabai -m window --resize left:20:0
+cmd + ctrl + shift - h : yabai -m window west --resize right:-20:0 2> /dev/null || yabai -m window --resize right:-20:0
+cmd + ctrl + shift - j : yabai -m window north --resize bottom:0:20 2> /dev/null || yabai -m window --resize bottom:0:20
+cmd + ctrl + shift - k : yabai -m window south --resize top:0:-20 2> /dev/null || yabai -m window --resize top:0:-20
+cmd + ctrl + shift - l: yabai -m window east --resize left:20:0 2> /dev/null || yabai -m window --resize left:20:0
 
