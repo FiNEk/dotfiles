@@ -54,6 +54,7 @@ setopt hist_verify              # Do Not Execute Immediately Upon History Expans
 ## brew install gnupg
 export GPG_TTY=$(tty)
 
+
 zi wait lucid light-mode depth"1" for \
   as'completion' atload'zicompinit; zicdreplay' \
     clarketm/zsh-completions \
@@ -78,3 +79,6 @@ PS1=`print $(echo $PWD) "%F{magenta}λ%f "`
 alias vim='nvim'
 # autostart TMUX
 [ -z "$TMUX" ] && exec tmux new -As .
+
+## force keychain add
+ssh-add --apple-use-keychain ~/.ssh/FiNEk
