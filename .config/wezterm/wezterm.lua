@@ -15,16 +15,16 @@ config.color_scheme = "Tokyo Night"
 config.enable_tab_bar = false
 config.enable_scroll_bar = false
 config.window_padding = {
-	left = 6,
+	left = 0,
 	right = 0,
-	top = "0.5cell",
-	bottom = "0.5cell",
+	top = 0,
+	bottom = 0,
 }
 -- ## Fonts ##
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Medium" })
 config.font_size = 15
 -- ## GPU ##
--- config.front_end = "WebGpu"
+config.front_end = "WebGpu"
 -- config.max_fps = 144
 
 return config

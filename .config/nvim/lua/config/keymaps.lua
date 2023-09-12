@@ -14,7 +14,7 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
--- TODO: move this mapping to plugins/vim-tmux-navigator.lua definition
+-- -- TODO: move this mapping to plugins/vim-tmux-navigator.lua definition
 map("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "Window left" })
 map("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "Window down" })
 map("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "Window up" })
