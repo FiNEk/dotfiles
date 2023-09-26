@@ -3,9 +3,9 @@ return {
     "mfussenegger/nvim-dap",
     opts = function()
       local dap = require("dap")
-      require("dap").adapters["pwa-node"] = {
+      require("dap").adapters["node"] = {
         type = "server",
-        host = "127.0.0.1",
+        host = "localhost",
         port = "${port}",
         executable = {
           command = "node",
@@ -19,14 +19,14 @@ return {
       for _, language in ipairs({ "typescript", "javascript" }) do
         dap.configurations[language] = {
           {
-            type = "pwa-node",
+            type = "node",
             request = "launch",
             name = "Launch file",
             program = "${file}",
             cwd = "${workspaceFolder}",
           },
           {
-            type = "pwa-node",
+            type = "node",
             request = "attach",
             name = "Attach",
             processId = require("dap.utils").pick_process,
