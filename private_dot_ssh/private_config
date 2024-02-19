@@ -1,0 +1,18 @@
+Host finek.github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/FiNEk
+
+Host fru.github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_fundraiseup
+
+Host *.fru.zone
+  User ubuntu
+  IdentityFile ~/.ssh/id_ed25519_fundraiseup
+
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentitiesOnly yes

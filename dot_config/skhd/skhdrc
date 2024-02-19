@@ -1,0 +1,67 @@
+# open terminal
+# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+# cmd - return : /Applications/WezTerm.app/Contents/MacOS/wezterm
+
+# open bravebrowser
+# cmd + shift - return : /Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser
+
+# SPACES
+# focus space
+cmd - h : yabai -m space --focus prev
+cmd - l : yabai -m space --focus next
+# focus monitor
+# cmd + shift - h : yabai -m display --focus west 
+# cmd + shift - l : yabai -m display --focus east 
+# destroy space
+cmd + shift - q : yabai -m space --destroy
+# send window to desktop and follow focus
+cmd + shift - h : yabai -m window --space prev; yabai -m space --focus prev
+cmd + shift - l : yabai -m window --space next; yabai -m space --focus next
+# create a new space and follow focus
+cmd - n : yabai -m space --create && \
+                  index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
+                  yabai -m space --focus "${index}"
+
+# create a new space, move window and follow focus
+cmd + shift - n : yabai -m space --create && \
+                  index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
+                  yabai -m window --space "${index}" && \
+                  yabai -m space --focus "${index}"
+# ## FOCUS
+# # focus window 
+cmd + ctrl - h : yabai -m window --focus west
+cmd + ctrl - l : yabai -m window --focus east
+cmd + ctrl - j : yabai -m window --focus south
+cmd + ctrl - k : yabai -m window --focus north
+
+## MISC
+# float / unfloat window and center on screen
+cmd - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+# toggle window fullscreen zoom
+cmd - f : yabai -m window --toggle zoom-fullscreen
+# toggle sticky(+float), topmost, picture-in-picture
+# alt - p : yabai -m window --toggle sticky --toggle topmost --toggle pip
+# balance size of windows
+cmd + shift - r : yabai -m space --balance
+# rotate
+cmd - r : yabai -m space --rotate 180
+
+## MOVING WINDOWS 
+# move window, change desktop if no window
+# cmd + shift - h : yabai -m window --swap west
+# cmd + shift - j : yabai -m window --swap south
+# cmd + shift - k : yabai -m window --swap north
+# cmd + shift - l : yabai -m window --swap east
+# # send window to monitor and follow focus
+# shift + alt - a : yabai -m window --display west; yabai -m display --focus west
+# shift + alt - d : yabai -m window --display east; yabai -m display --focus east
+# # send ALL windows to other monitor and follow focus
+# ctrl + shift + alt - d : $HOME/.config/skhd/swap_monitor.sh east
+# ctrl + shift + alt - a : $HOME/.config/skhd/swap_monitor.sh west
+#
+# ## RESIZE
+cmd + ctrl + shift - h : yabai -m window west --resize right:-20:0 2> /dev/null || yabai -m window --resize right:-20:0
+cmd + ctrl + shift - j : yabai -m window north --resize bottom:0:20 2> /dev/null || yabai -m window --resize bottom:0:20
+cmd + ctrl + shift - k : yabai -m window south --resize top:0:-20 2> /dev/null || yabai -m window --resize top:0:-20
+cmd + ctrl + shift - l: yabai -m window east --resize left:20:0 2> /dev/null || yabai -m window --resize left:20:0
+
