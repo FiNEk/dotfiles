@@ -3,10 +3,10 @@ return {
   lazy = false,
   opts = {
     keymaps = {
-      ["<q>"] = "actions.close",
+      ["<Esc>"] = "actions.close",
     },
   },
   keys = {
-    { "<leader>e", "<CMD>Oil<CR>", desc = "Open parent directory" },
+    { "<leader>e", "<CMD>Oil --float<CR>", desc = "Open parent directory" },
   },
 }
